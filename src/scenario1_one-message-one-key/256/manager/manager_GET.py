@@ -29,7 +29,7 @@ from pysnmp.carrier.asyncore.dgram import udp
 from pysnmp.entity.rfc3413 import cmdgen
 from pysnmp.hlapi import usmHMACSHAAuthProtocol
 
-#try to import aes-256; fail fast if unavailable
+#try to import aes-256 -> fail fast if unavailable
 try:
     from pysnmp.hlapi import usmAesCfb256Protocol
 except Exception as e:
