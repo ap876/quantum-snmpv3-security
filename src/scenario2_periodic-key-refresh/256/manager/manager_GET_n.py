@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -- coding: utf-8 --
+# original code basis: https://github.com/etingof/pysnmp
+# file path: examples/v3arch/asyncore/manager/cmdgen/usm-sha-aes128.py
 """
 SNMPv3 client (authPriv: SHA + AES-256) with KMS integration
 POLICY: time-based rekey → rotate the active key every N seconds (e.g., 30/60 s)
