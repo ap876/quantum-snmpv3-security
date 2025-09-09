@@ -9,7 +9,8 @@ snmpv3 client (authPriv: SHA + AES-128) with kms integration, GETBULK mode
 
 policy (scenario 1: one message – one key):
 - for each snmp message, the manager fetches a fresh enc_key from master kms (key_ID, key_bytes)
-- the manager notifies the agent at /kms with key_ID; the agent pulls dec_key from slave kms and rotates usm
+- the manager notifies the agent at /kms with key_ID
+- the agent pulls dec_key from slave kms and rotates usm
 - the manager waits briefly and sends exactly one snmp GETBULK using that fresh key
 - keys are not reused, a short pause follows before the next cycle
 """
