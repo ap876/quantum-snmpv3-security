@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -- coding: utf-8 --
-# original code basis: https://github.com/etingof/pysnmp/tree/master
+# original code basis: https://github.com/etingof/pysnmp
 # file path: examples/v3arch/asyncore/manager/cmdgen/usm-sha-aes128.py
 # adapted and extended for scenario 1 ("one message – one key") with KMS integration
 
