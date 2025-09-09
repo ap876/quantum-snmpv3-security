@@ -51,13 +51,13 @@ MASTER_APP_ID   = "aaac7de9-5826-11ef-8057-9b39f247aaa"
 
 KMS_URL_TO_AGENT = f"http://{AGENT_HOST}:{QKD_PORT}/kms"
 
-# POLICY: 1 key for 1 message
-# give agent time to fetch/apply key before GET
+#POLICY: 1 key for 1 message
+#give agent time to fetch/apply key before GET
 PER_MESSAGE_SLEEP_APPLY = 1.0   
-# short pause between cycles
+#short pause between cycles
 PAUSE_BETWEEN_MESSAGES  = 1.0 
 
-# sliding window for deduplicating recently used key_IDs -> to avoid accidental reuse
+#sliding window for deduplicating recently used key_IDs -> to avoid accidental reuse
 DEDUP_WINDOW = 2000
 
 
@@ -93,7 +93,7 @@ def get_enc_key_from_kms(master_base: str, app_id: str, n_keys: int = 1, size_bi
     except Exception:
         raw = None
 
-    # simple fallback via curl for lab setups that behave better with it
+    #simple fallback via curl for lab setups that behave better with it
     if raw is None:
         try:
             raw = subprocess.check_output(
@@ -148,7 +148,7 @@ def run_snmp_get(agent_host: str, agent_port: int, user: str, auth_pass: str, pr
     snmpEngine = engine.SnmpEngine()
     config.addTransport(snmpEngine, udp.domainName, udp.UdpTransport().openClientMode())
 
-    # register usm user credentials — auth: sha (string), priv: aes-128 (bytes)
+    #register usm user credentials — auth: sha (string), priv: aes-128 (bytes)
     config.addV3User(
         snmpEngine, user,
         usmHMACSHAAuthProtocol, auth_pass,
@@ -188,7 +188,7 @@ def main() -> None:
                 time.sleep(3)
                 continue
 
-            # avoid reusing the same key_ID if kms re-serves it
+            #avoid reusing the same key_ID if kms re-serves it
             if key_id in recent_set:
                 logging.info("duplicate key_ID=%s received, sleeping 2s and retry…", key_id)
                 time.sleep(2)
@@ -200,17 +200,17 @@ def main() -> None:
                 time.sleep(2)
                 continue
 
-            # update dedup structures
+            #update dedup structures
             if len(recent_ids) == recent_ids.maxlen:
                 old = recent_ids.popleft()
                 recent_set.discard(old)
             recent_ids.append(key_id)
             recent_set.add(key_id)
 
-            # give agent time to apply key
+            #give agent time to apply key
             time.sleep(PER_MESSAGE_SLEEP_APPLY)
 
-            # send exactly one GET using the fresh key
+            #send exactly one GET using the fresh key
             run_snmp_get(AGENT_HOST, AGENT_PORT, USERNAME, AUTH_PASS, key_bytes, OID_STR)
             sent_count += 1
             logging.info("total GET messages sent: %d", sent_count)
