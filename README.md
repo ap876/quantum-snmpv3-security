@@ -47,13 +47,16 @@ pip3 install pysnmp requests matplotlib pandas
 ```
 ## Project Structure
 
-- Scenario 1 – Each SNMPv3 message (GET, GET-BULK, TRAP, INFORM) is protected with a unique QKD key, using AES-128 or AES-256.  
-- Scenario 2 – Keys are rotated periodically instead of per message, and performance is analyzed for GET, GET-BULK, TRAP, and INFORM.  
-- Scenario 3 – The impact of varying QKD generation rates (10–150 kbps) is evaluated using GET, GET-NEXT, and GET-BULK.  
-- Scenario 4 – Response time is compared between one-by-one and batch retrieval of cryptographic keys from the KMS.  
-- Scenario 5 – AES-128 and AES-256 are benchmarked to measure processing speed and system overhead.  
+All scenario folders are located under the `src/` directory:
 
-Each folder is located in the `src/` directory and contains a README file with a detailed description of the scenario, parameter tables, and instructions for running the experiments.
+- `src/scenario1_one-message-one-key/` – Each SNMPv3 message (GET, GET-BULK, TRAP, INFORM) is protected with a unique QKD key, using AES-128 or AES-256.
+- `src/scenario2_time-refresh-policy/` – Keys are rotated periodically instead of per message, and performance is analyzed for GET, GET-BULK, TRAP, and INFORM.
+- `src/scenario3_key-generation-rates/` – The impact of varying QKD generation rates (10–150 kbps) is evaluated using GET, GET-NEXT, and GET-BULK.
+- `src/scenario4_rtt-kms-retrieval/` – Response time is compared between one-by-one and batch retrieval of cryptographic keys from the KMS.
+- `src/scenario5_aes-performance/` – AES-128 and AES-256 are benchmarked to measure processing speed and system overhead.
+
+Each folder contains a README file with detailed descriptions of the scenario, parameter tables, and instructions for running the experiments.
+
 
 ## Simulation Environment
 
