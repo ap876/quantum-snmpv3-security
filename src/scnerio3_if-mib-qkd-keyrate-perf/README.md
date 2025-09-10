@@ -25,7 +25,7 @@ python3 128/agent.py
 ```
 python3 128/manager.py
 ```
-(Replace 128/ with 256/ to run the AES-256 variant. The --period parameter defines the key refresh interval.)
+(Replace 128/ with 256/ to run the AES-256 variant.)
 
 ## Results and Visualization
 
