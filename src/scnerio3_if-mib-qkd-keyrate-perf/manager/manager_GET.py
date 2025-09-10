@@ -1,4 +1,5 @@
-#source:user; path: scnerio3_if_mib_qkd_keyrate_performance/client_ifmib_get_kms.py
+# original code basis: https://github.com/etingof/pysnmp
+# file path: examples/v3arch/asyncore/manager/cmdgen/usm-sha-aes128.py
 #!/usr/bin/env python3
 #-- coding: utf-8 --
 
