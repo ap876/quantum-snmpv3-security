@@ -21,11 +21,11 @@ Two variants are implemented: AES-128 and AES-256.
 ```
 2. Run the agent (separate terminal):
 ```
-python3 128/agent.py --listen 0.0.0.0:161 
+python3 128/agent.py 
 ```
 3. Run the manager (another terminal):
 ```
-python3 128/manager.py --target <agent-ip>:161 
+python3 128/manager.py 
 ```
 (Replace 128/ with 256/ to run the AES-256 variant.)
 
