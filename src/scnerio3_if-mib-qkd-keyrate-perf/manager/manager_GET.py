@@ -252,7 +252,7 @@ def main():
     print(f"[logger] writing to: {log_path}")
     log_note("client GET(full IF-MIB) start")
 
-    #1) discovery
+    #1. discovery
     all_oids = discover_if_mib_instances(
         args.backend_host, args.backend_port,
         args.backend_comm, args.backend_timeout, args.backend_retries
@@ -268,7 +268,7 @@ def main():
 
     kms_url_to_agent = f"http://{args.agent_host}:{args.qkd_port}/kms"
 
-    #2) kms policy
+    #2. kms policy
     total_msgs = 0
     keys_used = 0
     qkd_bits_consumed = 0
@@ -328,7 +328,7 @@ def main():
 
             time.sleep(args.pause_between_batches)
 
-    #3) report
+    #3. report
     logging.info("done: sent GET messages (encrypted) = %d", total_msgs)
     logging.info("kms keys used = %d", keys_used)
     logging.info("qkd bits consumed (estimate) = %d", qkd_bits_consumed)
