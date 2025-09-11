@@ -276,23 +276,23 @@ def main():
         logging.info("run #%d: batch GET ukupno %d ključeva (%.1f ms)", run, len(key_ids_all), total_get_ms)
 
         #3.post each key
-        for idx, kid in enumerate(key_ids_all, start=1):
-            ok_post, t_post_ms, req_b, resp_post_b, post_note = post_key_id_to_agent(
-                args.kms_url, args.user, kid, timeout_sec=5
-            )
-            write_csv_op(args.outfile, run, mode, args.kms_key_bits, "POST", idx, kid,
-                         t_post_ms, req_bytes=req_b, resp_bytes=resp_post_b, note=post_note)
-            if not ok_post:
-                logging.error("run #%d key#%d: POST fail (key_ID=%s) %s", run, idx, kid, post_note)
-            time.sleep(0.05)
+        #for idx, kid in enumerate(key_ids_all, start=1):
+          #  ok_post, t_post_ms, req_b, resp_post_b, post_note = post_key_id_to_agent(
+             #   args.kms_url, args.user, kid, timeout_sec=5
+          #  )
+           # write_csv_op(args.outfile, run, mode, args.kms_key_bits, "POST", idx, kid,
+            #             t_post_ms, req_bytes=req_b, resp_bytes=resp_post_b, note=post_note)
+           # if not ok_post:
+           #     logging.error("run #%d key#%d: POST fail (key_ID=%s) %s", run, idx, kid, post_note)
+           # time.sleep(0.05)
 
         #4.snmp per key
-        #for idx, (kbytes, kid) in enumerate(zip(key_bytes_all, key_ids_all), start=1):
-        #    if args.wait_ready:
-        #        _ = wait_ready(args.kms_ready_url, kid, timeout_sec=max(1.0, args.snmp_retries*0.5), interval=0.15)
-        #    ok, t_snmp_ms = snmp_get_once(args.agent_host, args.agent_port, args.user, args.auth_pass,
-        #                                  kbytes, args.kms_key_bits, args.oid, timeout_sec=args.snmp_timeout)
-        #    write_csv_op(args.outfile, run, mode, args.kms_key_bits, "SNMP", idx, kid, t_snmp_ms)
+        for idx, (kbytes, kid) in enumerate(zip(key_bytes_all, key_ids_all), start=1):
+            if args.wait_ready:
+                _ = wait_ready(args.kms_ready_url, kid, timeout_sec=max(1.0, args.snmp_retries*0.5), interval=0.15)
+            ok, t_snmp_ms = snmp_get_once(args.agent_host, args.agent_port, args.user, args.auth_pass,
+                                          kbytes, args.kms_key_bits, args.oid, timeout_sec=args.snmp_timeout)
+           write_csv_op(args.outfile, run, mode, args.kms_key_bits, "SNMP", idx, kid, t_snmp_ms)
 
         time.sleep(args.sleep_between)
 
